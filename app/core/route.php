@@ -42,9 +42,24 @@ class Route
         }
     }
 
-    static function ErrorPage404(): void
+    private static function RedirectToPage($page): void
     {
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
-        header('Location: '. $host . '404');
+        header('Location: ' . $host . $page);
+    }
+
+    static function ErrorPage404(): void
+    {
+        Route::RedirectToPage('404');
+    }
+    
+    static function LoginPage(): void
+    {
+        Route::RedirectToPage('login');
+    }
+    
+    static function MainPage(): void
+    {
+        Route::RedirectToPage('main');
     }
 }
