@@ -18,6 +18,7 @@ Class Model_Login extends Model{
         }
     }
     function logout(){
+        session_start();
         $_SESSION['admin'] = 0;
         Route::LoginPage();
     }
