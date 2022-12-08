@@ -5,6 +5,7 @@ Class Model_Login extends Model{
     function login($login, $password){
         $db = new Database();
         $db->query("SELECT * FROM users WHERE login = :login");
+        $login = htmlspecialchars($login);
         $db->bind(':login', $login);
         $row = $db->single();
         $password = md5($password);
