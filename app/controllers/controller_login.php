@@ -3,7 +3,7 @@ Class Controller_Login extends Controller{
     function action_index(){
         $this->view->generate('login_view.php', 'template_view.php');
         session_start();
-        if($_SESSION['admin'] == 1){
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
             Route::MainPage();
         }
     }
