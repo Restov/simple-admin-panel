@@ -40,6 +40,9 @@ Class Model_User extends Model{
             $_SESSION['error'] = "User with this login already exists<br>";
         }
         else{
+            $login = htmlspecialchars($login);
+            $role = htmlspecialchars($role);
+            
             $password = md5($password);
             $db->query("INSERT INTO users (login, password, role) VALUES (:login, :password, :role)");
             $db->bind(':login', $login);
