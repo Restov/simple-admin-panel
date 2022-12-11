@@ -12,11 +12,11 @@
         unset($_SESSION['error']);
     }
     if($_SERVER['REQUEST_URI'] != '/login'){
-        echo "<a href='/'>Главная</a><br>";
+        echo "<a href='/main/list'>Главная</a><br>";
     }
     if(isset($_SESSION)){
         if($_SESSION['admin'] == 1){
-            echo "<a href='login/logout'>Выйти</a><br><br>";
+            echo "<a href='../login/logout'>Выйти</a><br><br>";
         }
     }
     include 'app/views/'.$content_view; ?>

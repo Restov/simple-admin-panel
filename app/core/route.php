@@ -7,13 +7,15 @@ class Route
         $controller_name = 'Main';
         $action_name = 'index';
         $routes = explode('/', $_SERVER['REQUEST_URI']);
-
+        if(empty($routes[1])){
+            Route::MainPage();
+        }
         if (!empty($routes[1])) {
             $controller_name = $routes[1];
         }
 
         if (!empty($routes[2])) {
-            $action_name = $routes[2];
+            $action_name = explode('?', $routes[2])[0];
         }
 
 
@@ -65,6 +67,7 @@ class Route
 
     static function MainPage(): void
     {
-        Route::RedirectToPage('main');
+        Route::RedirectToPage('main/list');
     }
+
 }
