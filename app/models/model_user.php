@@ -68,11 +68,10 @@ Class Model_User extends Model{
             $_SESSION['error'] = "You can't edit admin<br>";
         }
         else{
-            $login = htmlspecialchars($login);
             $name = htmlspecialchars($name);
             $surname = htmlspecialchars($surname);
             $role = htmlspecialchars($role);
-            if($login == '' || $name == '' || $surname == '' || $role == ''){
+            if($name == '' || $surname == '' || $role == ''){
                 Route::MainPage();
                 session_start();
                 $_SESSION['error'] = "You must fill all fields<br>";

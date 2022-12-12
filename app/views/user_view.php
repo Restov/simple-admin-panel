@@ -6,9 +6,8 @@ echo "<a href='../delete/".$data['login']."'>Удалить пользовате
 
 echo "<form action='../edit/".$data['login']."' method='post'>";
 echo "<div class='form-group'>";
-echo "<label for='login'>Login</label>";
-echo "<input type='text' class='form-control' id='login' name='login' value='".$data['login']."'>";
-echo "</div>";
+echo "<p>Login: ".$data['login']."</p>";
+echo "<input type='hidden' name='login' value='".$data['login']."'>";
 echo "<div class='form-group'>";
 echo "<label for='role'>Role</label>";
 echo "<input type='text' class='form-control' id='role' name='role' value='".$data['role']."'>";

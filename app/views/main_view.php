@@ -14,8 +14,8 @@
 
         $pages = ceil(count($data['users']) / 5);
 
-        if ($page > $pages) {
-            Route::ErrorPage404();
+        if ($page >= $pages) {
+            $page -= 1;
         }
 
         echo "<nav>";
