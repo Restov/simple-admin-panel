@@ -1,12 +1,24 @@
 </head>
 <body>
 <?php 
+
 echo "<a href='../delete/".$data['login']."'>Удалить пользователя</a><br><br>";
-echo "<div class='card' style='width: 18rem; border: 1px solid black;'>";
-echo "<div class='card-body'>";
-echo "<h5 class='card-title'>".$data['login']."</h5>";
-echo "<h6 class='card-subtitle mb-2 text-muted'>".$data['role']."</h6>";
-echo "<p class='card-text'>Имя: ".$data['name']."</p>";
-echo "<p class='card-text'>Фамилия: ".$data['surname']."</p>";
+
+echo "<form action='../edit/".$data['login']."' method='post'>";
+echo "<div class='form-group'>";
+echo "<p>Login: ".$data['login']."</p>";
+echo "<input type='hidden' name='login' value='".$data['login']."'>";
+echo "<div class='form-group'>";
+echo "<label for='role'>Role</label>";
+echo "<input type='text' class='form-control' id='role' name='role' value='".$data['role']."'>";
 echo "</div>";
+echo "<div class='form-group'>";
+echo "<label for='name'>Name</label>";
+echo "<input type='text' class='form-control' id='name' name='name' value='".$data['name']."'>";
 echo "</div>";
+echo "<div class='form-group'>";
+echo "<label for='surname'>Surname</label>";
+echo "<input type='text' class='form-control' id='surname' name='surname' value='".$data['surname']."'>";
+echo "</div>";
+echo "<button type='submit' class='btn btn-primary'>Edit</button>";
+echo "</form>";

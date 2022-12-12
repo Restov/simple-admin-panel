@@ -2,7 +2,7 @@
 include 'app/models/model_database.php';
 Class Model_User extends Model{
     function get_user($login){
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM users WHERE login = :login");
         $db->bind(':login', $login);
         $row = $db->single();
@@ -13,7 +13,7 @@ Class Model_User extends Model{
     }
 
     function delete_user($login){
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM users WHERE login = :login");
         $db->bind(':login', $login);
         $row = $db->single();
@@ -30,7 +30,7 @@ Class Model_User extends Model{
     }
 
     function add_user($login, $password, $role){
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM users WHERE login = :login");
         $db->bind(':login', $login);
         $row = $db->single();
@@ -42,11 +42,45 @@ Class Model_User extends Model{
         else{
             $login = htmlspecialchars($login);
             $role = htmlspecialchars($role);
-            
+            if($login == '' || $password == '' || $role == ''){
+                Route::MainPage();
+                session_start();
+                $_SESSION['error'] = "You must fill all fields<br>";
+                return;
+            }
             $password = md5($password);
             $db->query("INSERT INTO users (login, password, role) VALUES (:login, :password, :role)");
             $db->bind(':login', $login);
             $db->bind(':password', $password);
+            $db->bind(':role', $role);
+            $db->execute();
+        }
+    }
+
+    function edit_user($login, $name, $surname, $role){
+        $db = Database::getInstance();
+        $db->query("SELECT * FROM users WHERE login = :login");
+        $db->bind(':login', $login);
+        $row = $db->single();
+        if($row['role'] == 'admin'){
+            Route::MainPage();
+            session_start();
+            $_SESSION['error'] = "You can't edit admin<br>";
+        }
+        else{
+            $name = htmlspecialchars($name);
+            $surname = htmlspecialchars($surname);
+            $role = htmlspecialchars($role);
+            if($name == '' || $surname == '' || $role == ''){
+                Route::MainPage();
+                session_start();
+                $_SESSION['error'] = "You must fill all fields<br>";
+                return;
+            }
+            $db->query("UPDATE users SET name = :name, surname = :surname, role = :role WHERE login = :login");
+            $db->bind(':login', $login);
+            $db->bind(':name', $name);
+            $db->bind(':surname', $surname);
             $db->bind(':role', $role);
             $db->execute();
         }

@@ -30,4 +30,9 @@ Class Controller_User extends Controller {
         Route::MainPage();
     }
 
+    function action_edit()
+    {
+        $this->model->edit_user($_POST['login'], $_POST['name'], $_POST['surname'], $_POST['role']);
+        Route::MainPage();
+    }
 }

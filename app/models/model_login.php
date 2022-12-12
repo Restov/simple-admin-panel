@@ -3,7 +3,7 @@ include 'app/models/model_database.php';
 Class Model_Login extends Model{
  
     function login($login, $password){
-        $db = new Database();
+        $db = Database::getInstance();
         $db->query("SELECT * FROM users WHERE login = :login");
         $login = htmlspecialchars($login);
         $db->bind(':login', $login);
